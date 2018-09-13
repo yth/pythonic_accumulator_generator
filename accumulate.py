@@ -9,21 +9,26 @@
 # to work, and what kind of behaviors recursively calling a method would
 # have. So, I will use the fold left as a simple proof of concept. 
 
+from copy import copy
+
 class fold_left(object):
     """ 
     I will use the python class abstraction to produce the "function"
     objects. 
     """
 
-    def __init__(self, initial, func):
-        self.initial = initial
+    def __init__(self, init, func):
+        self.initial = init
         self.function = func
 
     def __call__(self, sequence):
-        while(sequence):
-            self.initial = self.function(self.initial, sequence.pop(0))
+        initial = copy(self.initial)
+        function = copy(self.function)
 
-        return self.initial
+        while(sequence):
+            initial = function(initial, sequence.pop(0))
+
+        return initial
 
 if __name__ == "__main__":
 
@@ -62,7 +67,10 @@ if __name__ == "__main__":
     assert(filter0([]) == [])
 
     filter1 = fold_left([], predicate)
-    assert(filter0([0, 1, 2]) == [])
+    assert(filter1([0, 1, 2]) == [])
 
     filter2 = fold_left([], predicate)
-    assert(filter0([0, 1, 2, 3]) == [3])
+    assert(filter2([0, 1, 2, 3]) == [3])
+
+    # Reuse function
+    assert(filter2([0, 1, 2, 3]) == [3])

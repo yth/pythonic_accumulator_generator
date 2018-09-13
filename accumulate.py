@@ -37,12 +37,8 @@ if __name__ == "__main__":
 
     sum0 = fold_left(0, add)
     assert(sum0([]) == 0)
-
-    sum1 = fold_left(0, add)
-    assert(sum1([1, 2, 3]) == 6)
-
-    sum2 = fold_left(0, add)
-    assert(sum2(list(range(10))) == 45)
+    assert(sum0([1, 2, 3]) == 6)
+    assert(sum0(list(range(10))) == 45)
 
     def cons(a, b):
         a.extend([b])
@@ -50,12 +46,8 @@ if __name__ == "__main__":
 
     append0 = fold_left([], cons)
     assert(append0([]) == [])
-
-    append1 = fold_left([], cons)
-    assert(append1([1]) == [1])
-
-    append2 = fold_left([], cons)
-    assert(append2([1, 2 ,3]) == [1, 2, 3])
+    assert(append0([1]) == [1])
+    assert(append0([1, 2 ,3]) == [1, 2, 3])
 
     def predicate(a, b):
         if b > 2:
@@ -65,12 +57,6 @@ if __name__ == "__main__":
 
     filter0 = fold_left([], predicate)
     assert(filter0([]) == [])
-
-    filter1 = fold_left([], predicate)
-    assert(filter1([0, 1, 2]) == [])
-
-    filter2 = fold_left([], predicate)
-    assert(filter2([0, 1, 2, 3]) == [3])
-
-    # Reuse function
-    assert(filter2([0, 1, 2, 3]) == [3])
+    assert(filter0([0, 1, 2]) == [])
+    assert(filter0([0, 1, 2, 3]) == [3])
+    assert(filter0([0, 1, 2, 3]) == [3])

@@ -60,3 +60,20 @@ if __name__ == "__main__":
     assert(filter0([0, 1, 2]) == [])
     assert(filter0([0, 1, 2, 3]) == [3])
     assert(filter0([0, 1, 2, 3]) == [3])
+
+    # Combined use
+    assert(sum0(filter0(list(range(10)))) == sum0(list(range(3, 10))))
+
+    # map
+
+    def create_map(process):
+        def map_lambda(a, b):
+            a.extend([process(b)])
+            return a
+
+        return fold_left([], map_lambda)
+
+
+    square = lambda x: x * x
+    map0 = create_map(square)
+    assert(map0([1, 2, 3]) == [1, 4, 9])

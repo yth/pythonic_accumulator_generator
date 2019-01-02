@@ -13,12 +13,12 @@ def foldl(op, init, seq):
 
 if __name__ == "__main__":
 
+	# foldr and foldl should be equivalent to each other if:
+	# op is commutative
 	def add2(a, b): return a + b
-
 	def suml(seq): return foldl(add2, 0, seq)
-
-	assert(suml(list(range(10))) == 45)
-
 	def sumr(seq): return foldr(add2, 0, seq)
-
+	assert(suml(list(range(10))) == 45)
 	assert(sumr(list(range(10))) == 45)
+
+	

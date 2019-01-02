@@ -32,4 +32,5 @@ if __name__ == "__main__":
 	f = foo(add2, 1, save_state=True)
 	print(f([1]))
 	print(f([1]))
+	f = foo(add2, 1, save_state=True)
 	print(f([1, 1]))

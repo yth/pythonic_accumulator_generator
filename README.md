@@ -1,3 +1,3 @@
-# Python Accumulate
+# Pythonic Accumulator Generator
 
-Implemeting a SICP/Scheme style accumulate function in python.
+Generalized version of accumulator generator mentioned in Paul Graham's blog

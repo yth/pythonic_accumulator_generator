@@ -24,35 +24,37 @@ class accumulator(object):
 if __name__ == "__main__":
 
 	# accumulator generator a la Paul Graham
+	print("Accumulator Generator Solution Demo")
+
 	def add2(a, b): return a + b
 
-	foo = accumulator
-	f = foo(add2, 10, save_state=True)
-	print("Accumulator Generator Solution Demo")
-	print(f([1]))
-	print(f([1]))
-	print()
+	def foo(n):
+		return accumulator(add2, n, save_state=True)
 
-	# This is equivalent to the above
-	# 	if you don't want to see the intervening step
-	f = foo(add2, 10, save_state=True)
-	print("Do both adds at once")
-	print(f([1, 1]))
+	f = foo(10)
+	print(f([1]))
+	print(f([1]))
+
+"""
+	# We incurred some inconvenience, but we gained more power as well
+	print()
+	print("We have become more powerful")
+	print(f([1, 2, 3]))
 	print()
 
 	# map
-	def apply_and_append(a, b, f):
+	def apply_and_extend(a, b, f):
 		return [f(a)] + b
 
-	def add1(x): return x + 1
+	def inc1(x): return x + 1
 
-	map = accumulator(apply_and_append, [])
+	map = accumulator(apply_and_extend, [])
 	print("map demo")
-	print(map(list(range(10)), func=add1))
+	print(map(list(range(10)), func=inc1))
 	print()
 
 	# filter
-	def selective_append(a, b, f):
+	def selective_extend(a, b, f):
 		if f(a):
 			return [a] + b
 		else:
@@ -61,11 +63,17 @@ if __name__ == "__main__":
 	def gt_2(x):
 		return x > 2
 
-	filter = accumulator(selective_append, [])
+	filter = accumulator(selective_extend, [])
 	print("filter demo")
 	print(filter(list(range(10)), func=gt_2))
+	print()
+
+	# chaining functions
+	print("chaining filter and map")
+	print(map(filter(list(range(10)), func=gt_2), func=inc1))
 	print()
 
 	import sys
 
 	print("Current Recursion Limit: {}".format(sys.getrecursionlimit()))
+"""
